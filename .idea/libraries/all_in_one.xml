@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="all-in-one">
+    <CLASSES>
+      <root url="file://C:/Program Files/Java/netty-4.1.43.Final/jar/all-in-one" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://C:/Program Files/Java/netty-4.1.43.Final/jar/all-in-one" />
+    </SOURCES>
+    <jarDirectory url="file://C:/Program Files/Java/netty-4.1.43.Final/jar/all-in-one" recursive="false" />
+    <jarDirectory url="file://C:/Program Files/Java/netty-4.1.43.Final/jar/all-in-one" recursive="false" type="SOURCES" />
+  </library>
+</component>
