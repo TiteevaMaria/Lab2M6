@@ -26,6 +26,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<String>
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, String s) throws Exception
     {
+        players.clear();
         String[] splited = s.split(",");
         for (int i = 0; i < splited.length - 1; i += 3)
         {

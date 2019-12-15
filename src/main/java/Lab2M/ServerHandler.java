@@ -10,7 +10,6 @@ public class ServerHandler extends SimpleChannelInboundHandler<String>
     private static ConcurrentHashMap<ChannelHandlerContext, Player> players = new ConcurrentHashMap<>();
     Player player = new Player();
 
-
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String s) throws Exception
     {
@@ -21,7 +20,26 @@ public class ServerHandler extends SimpleChannelInboundHandler<String>
         player.point.y = Integer.parseInt(mes[2]);
         players.put(ctx, player);
         System.out.println("players " + players);
+        sendPlayers();
+    }
 
+    @Override
+    public void channelRegistered(ChannelHandlerContext ctx) throws Exception
+    {
+        players.put(ctx, player);
+        super.channelRegistered(ctx);
+    }
+
+    @Override
+    public void channelUnregistered(ChannelHandlerContext ctx) throws Exception
+    {
+        players.remove(ctx);
+        System.out.println("unregistered");
+        sendPlayers();
+        super.channelUnregistered(ctx);
+    }
+    private void sendPlayers()
+    {
         StringBuilder stringBuilder = new StringBuilder();
         for (ChannelHandlerContext chc : players.keySet())
         {
@@ -37,19 +55,5 @@ public class ServerHandler extends SimpleChannelInboundHandler<String>
                 chc.writeAndFlush(stringBuilder);
             });
         }
-    }
-
-    @Override
-    public void channelRegistered(ChannelHandlerContext ctx) throws Exception
-    {
-        players.put(ctx, player);
-        super.channelRegistered(ctx);
-    }
-
-    @Override
-    public void channelUnregistered(ChannelHandlerContext ctx) throws Exception
-    {
-        players.remove(ctx);
-        super.channelUnregistered(ctx);
     }
 }
